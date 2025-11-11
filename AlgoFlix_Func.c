@@ -428,6 +428,10 @@ void displayPQ() {
 //Create BST Node
 BSTNODE* createBSTNode(NODE* data) {
     BSTNODE* newNode = (BSTNODE*)malloc(sizeof(BSTNODE));
+	if(!newNode){
+		printf("Memory is not alloctaed\n");
+		return NULL;
+	}
     newNode->data = data;
     newNode->left = newNode->right = NULL;
     return newNode;
@@ -440,26 +444,30 @@ BSTNODE* insertBST(BSTNODE* root, NODE* data) {
         strcpy(title, data->data.movie.title);
     else
         strcpy(title, data->data.series.title);
-	
-	//Base condition
-    if (root == NULL)
-        return createBSTNode(data);
 
-    char rootTitle[50]; //current title
-    if (root->data->type == 1){
+    // Base case: create a node only when root is NULL
+    if (root == NULL) {
+        BSTNODE *newNode = createBSTNode(data);
+        if (newNode == NULL) {
+            printf("Unable to insert Node\n");
+            return NULL;
+        }
+        return newNode;
+    }
+
+    char rootTitle[50];
+    if (root->data->type == 1)
         strcpy(rootTitle, root->data->data.movie.title);
-	}
-    else{
+    else
         strcpy(rootTitle, root->data->data.series.title);
-	}
 
-    if (strcasecmp(title, rootTitle) < 0){
+    if (strcasecmp(title, rootTitle) < 0)
         root->left = insertBST(root->left, data);
-	}
-    else if (strcasecmp(title, rootTitle) > 0){
+    else if (strcasecmp(title, rootTitle) > 0)
         root->right = insertBST(root->right, data);
-	}
-	
+    else
+        printf("Duplicate title '%s' ignored.\n", title);
+
     return root;
 }
 
@@ -584,3 +592,4 @@ void freeBST(BSTNODE *root) {
     if (root->data) free(root->data);
     free(root);
 }
+
