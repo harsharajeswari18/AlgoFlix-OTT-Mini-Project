@@ -481,7 +481,7 @@ BSTNODE* buildBST() {
         temp = (NODE*)malloc(sizeof(NODE));
 		if (!temp) {
 		    printf("Memory not allocated for movie node\n");
-		    continue;
+		    return root;
 		}
 
         temp->data.movie = movie_arr[i];
@@ -495,7 +495,7 @@ BSTNODE* buildBST() {
         temp = (NODE*)malloc(sizeof(NODE));
 		if (!temp) {
 		    printf("Memory not allocated for series node\n");
-		    continue;
+		    return root;
 		}
 
         temp->data.series = series_arr[i];
@@ -595,12 +595,19 @@ void freeContinueWatching() {
 }
 
 // Free BST
+//using post-order traversal
 void freeBST(BSTNODE *root) {
     if (root == NULL) return;
+	
     freeBST(root->left);
+	
     freeBST(root->right);
-    if (root->data) free(root->data);
+	
+    if (root->data != NULL){
+		free(root->data);
+	}
     free(root);
 }
+
 
 
