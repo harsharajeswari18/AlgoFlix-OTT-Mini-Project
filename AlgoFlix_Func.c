@@ -7,7 +7,7 @@
 
 //Arrays:
 
-static MOVIE movie_arr[] = {
+static const MOVIE movie_arr[] = {
     {101, "Dune: Part Two", "Sci-Fi", 155, 2024, 950},
     {102, "Oppenheimer", "Drama", 180, 2023, 880},
     {103, "Inside Out 2", "Animation", 110, 2024, 720},
@@ -31,7 +31,7 @@ static MOVIE movie_arr[] = {
 };
 static int movieCount = sizeof(movie_arr) / sizeof(movie_arr[0]);
 
-static SERIES series_arr[] = {
+static const SERIES series_arr[] = {
     {201, "Stranger Things", "Sci-Fi", 4, 34, 50, 2016, 960},
     {202, "Money Heist", "Thriller", 5, 41, 45, 2017, 890},
     {203, "The Boys", "Superhero", 4, 32, 55, 2019, 880},
@@ -408,20 +408,63 @@ void peekPQ() {
 }
 
 //DISPLAY
+//HEAP SORT
 void displayPQ() {
     if (heapSize == 0) {
         printf("\nNo latest releases in heap.\n");
         return;
     }
 
-    printf("\nLatest Releases\n");
-    for (int i = 0; i < heapSize; i++) {
-        if (heap[i].type == 1)
-            printf("Movie: %-30s | Year: %d | Genre: %s | Duration: %d min | Views: %d\n", heap[i].data.movie.title, heap[i].data.movie.releaseYear, heap[i].data.movie.genre, heap[i].data.movie.duration, heap[i].data.movie.views);
+    NODE temp[MAX];
+    int n = heapSize;
+    for (int i = 0; i < n; i++)
+        temp[i] = heap[i];
+
+    int i, p, c;
+    NODE elt;
+
+    // Heap sort (Max heap → descending order)
+    for (i = n - 1; i > 0; i--) {
+        elt = temp[i];
+        temp[i] = temp[0];
+        p = 0;
+
+        if (i == 1)
+            c = -1;
         else
-            printf("Series: %-29s | Year: %d | Genre: %s | Seasons: %d | Episodes: %d | Views: %d\n", heap[i].data.series.title, heap[i].data.series.releaseYear, heap[i].data.series.genre, heap[i].data.series.seasons, heap[i].data.series.episodes, heap[i].data.series.views);
+            c = 1;
+
+        if (i > 2 && getReleaseYear(temp[2]) > getReleaseYear(temp[1]))
+            c = 2;
+
+        while (c >= 0 && getReleaseYear(elt) < getReleaseYear(temp[c])) {
+            temp[p] = temp[c];
+            p = c;
+            c = 2 * p + 1;
+
+            if (c + 1 <= i - 1 && getReleaseYear(temp[c]) < getReleaseYear(temp[c + 1]))
+                c = c + 1;
+
+            if (c > i - 1)
+                c = -1;
+        }
+        temp[p] = elt;
+    }
+
+    printf("\nLatest Releases (Sorted by Year - Newest to Oldest)\n");
+    for (i = 0; i < n; i++) {
+        if (temp[i].type == 1)
+            printf("Movie: %-30s | Year: %d | Genre: %s | Duration: %d min | Views: %d\n",
+                   temp[i].data.movie.title, temp[i].data.movie.releaseYear,
+                   temp[i].data.movie.genre, temp[i].data.movie.duration, temp[i].data.movie.views);
+        else
+            printf("Series: %-29s | Year: %d | Genre: %s | Seasons: %d | Episodes: %d | Views: %d\n",
+                   temp[i].data.series.title, temp[i].data.series.releaseYear,
+                   temp[i].data.series.genre, temp[i].data.series.seasons,
+                   temp[i].data.series.episodes, temp[i].data.series.views);
     }
 }
+
 
 //SEARCH
 
@@ -608,6 +651,7 @@ void freeBST(BSTNODE *root) {
 	}
     free(root);
 }
+
 
 
 
