@@ -479,6 +479,11 @@ BSTNODE* buildBST() {
     // Insert Movies
     for (int i = 0; i < movieCount; i++) {
         temp = (NODE*)malloc(sizeof(NODE));
+		if (!temp) {
+		    printf("Memory not allocated for movie node\n");
+		    continue;
+		}
+
         temp->data.movie = movie_arr[i];
         temp->type = 1;
         temp->next = NULL;
@@ -488,6 +493,11 @@ BSTNODE* buildBST() {
     // Insert Series
     for (int i = 0; i < seriesCount; i++) {
         temp = (NODE*)malloc(sizeof(NODE));
+		if (!temp) {
+		    printf("Memory not allocated for series node\n");
+		    continue;
+		}
+
         temp->data.series = series_arr[i];
         temp->type = 2;
         temp->next = NULL;
@@ -592,4 +602,5 @@ void freeBST(BSTNODE *root) {
     if (root->data) free(root->data);
     free(root);
 }
+
 
