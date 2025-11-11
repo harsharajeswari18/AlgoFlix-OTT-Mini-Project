@@ -423,7 +423,7 @@ void displayPQ() {
     int i, p, c;
     NODE elt;
 
-    // Heap sort (Max heap → descending order)
+    // Heap sort (Max heap → ascending order)
     for (i = n - 1; i > 0; i--) {
         elt = temp[i];
         temp[i] = temp[0];
@@ -451,8 +451,11 @@ void displayPQ() {
         temp[p] = elt;
     }
 
+    // Max heap results in ascending order after sorting,
+	// so we print in reverse (Newest → Oldest)
+	//Here the Heap is a MAX_HEAP (since we r using max heapify) so it gives ascending order
     printf("\nLatest Releases (Sorted by Year - Newest to Oldest)\n");
-    for (i = 0; i < n; i++) {
+    for (i = n - 1; i >= 0; i--) {
         if (temp[i].type == 1)
             printf("Movie: %-30s | Year: %d | Genre: %s | Duration: %d min | Views: %d\n",
                    temp[i].data.movie.title, temp[i].data.movie.releaseYear,
@@ -651,6 +654,7 @@ void freeBST(BSTNODE *root) {
 	}
     free(root);
 }
+
 
 
 
