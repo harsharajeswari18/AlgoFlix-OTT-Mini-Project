@@ -431,7 +431,6 @@ void displayPQ() {
 
         // Step 2: sift-down from root to restore heap
         int p = 0;          // parent index
-        NODE elt = temp[0]; // (optional, but keep consistent)
         int size = i;       // heap size reduces each loop
 
         while (1) {
@@ -662,6 +661,7 @@ void freeBST(BSTNODE *root) {
 	}
     free(root);
 }
+
 
 
 
