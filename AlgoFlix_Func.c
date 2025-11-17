@@ -407,6 +407,8 @@ void peekPQ() {
 		printf("\nLatest Series: %s (%d)\n", heap[0].data.series.title, heap[0].data.series.releaseYear);
 }
 
+//DISPLAY
+//HEAP SORT
 void displayPQ() {
     if (heapSize == 0) {
         printf("\nNo latest releases in heap.\n");
@@ -661,6 +663,7 @@ void freeBST(BSTNODE *root) {
 	}
     free(root);
 }
+
 
 
 
