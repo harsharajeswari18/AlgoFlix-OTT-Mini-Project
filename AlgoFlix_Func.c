@@ -407,8 +407,6 @@ void peekPQ() {
 		printf("\nLatest Series: %s (%d)\n", heap[0].data.series.title, heap[0].data.series.releaseYear);
 }
 
-//DISPLAY
-//HEAP SORT
 void displayPQ() {
     if (heapSize == 0) {
         printf("\nNo latest releases in heap.\n");
@@ -416,46 +414,56 @@ void displayPQ() {
     }
 
     NODE temp[MAX];
-    int n = heapSize;
-    for (int i = 0; i < n; i++)
+
+    // copy global heap to temp
+    for (int i = 0; i < heapSize; i++)
         temp[i] = heap[i];
 
-    int i, p, c;
-    NODE elt;
+    int n = heapSize;
 
     // Heap sort (Max heap → ascending order)
-    for (i = n - 1; i > 0; i--) {
-        elt = temp[i];
-        temp[i] = temp[0];
-        p = 0;
+    for (int i = n - 1; i > 0; i--) {
 
-        if (i == 1)
-            c = -1;
-        else
-            c = 1;
+        // Step 1: swap root with last (max goes to end)
+        NODE t = temp[0];
+        temp[0] = temp[i];
+        temp[i] = t;
 
-        if (i > 2 && getReleaseYear(temp[2]) > getReleaseYear(temp[1]))
-            c = 2;
+        // Step 2: sift-down from root to restore heap
+        int p = 0;          // parent index
+        NODE elt = temp[0]; // (optional, but keep consistent)
+        int size = i;       // heap size reduces each loop
 
-        while (c >= 0 && getReleaseYear(elt) < getReleaseYear(temp[c])) {
-            temp[p] = temp[c];
-            p = c;
-            c = 2 * p + 1;
+        while (1) {
+            int left = 2 * p + 1;
+            int right = 2 * p + 2;
+            int large = p;
 
-            if (c + 1 <= i - 1 && getReleaseYear(temp[c]) < getReleaseYear(temp[c + 1]))
-                c = c + 1;
+            // choose larger of left child / parent
+            if (left < size && getReleaseYear(temp[left]) > getReleaseYear(temp[large]))
+                large = left;
 
-            if (c > i - 1)
-                c = -1;
+            // choose larger of right child / current largest
+            if (right < size && getReleaseYear(temp[right]) > getReleaseYear(temp[large]))
+                large = right;
+
+            // if parent is largest, heap is fixed
+            if (large == p)
+                break;
+
+            // swap parent with larger child
+            NODE tt = temp[p];
+            temp[p] = temp[large];
+            temp[large] = tt;
+
+            // move down
+            p = large;
         }
-        temp[p] = elt;
     }
 
-    // Max heap results in ascending order after sorting,
-	// so we print in reverse (Newest → Oldest)
-	//Here the Heap is a MAX_HEAP (since we r using max heapify) so it gives ascending order
-    printf("\nLatest Releases\n");
-    for (i = n - 1; i >= 0; i--) {
+    // Now temp[] is in ascending order → print reverse for "latest first"
+    printf("\nLatest Releases:\n");
+    for (int i = n - 1; i >= 0; i--) {
         if (temp[i].type == 1)
             printf("Movie: %-30s | Year: %d | Genre: %s | Duration: %d min | Views: %d\n",
                    temp[i].data.movie.title, temp[i].data.movie.releaseYear,
@@ -654,6 +662,7 @@ void freeBST(BSTNODE *root) {
 	}
     free(root);
 }
+
 
 
 
