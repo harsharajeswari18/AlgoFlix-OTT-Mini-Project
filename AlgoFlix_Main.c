@@ -235,7 +235,7 @@ int main()
 			printf("           ALGOFLIX         \n");
 			printf("==============================\n");
 			
-			printf("Enter first letter: ");
+			printf("\nEnter first letter: ");
 			scanf(" %c", &ch);
 			displayContentByLetter(ch);
 			break;
@@ -258,6 +258,7 @@ int main()
 
     return 0;
 }
+
 
 
 
