@@ -59,8 +59,12 @@ BSTNODE* buildBST();
 void displayMovies();
 void displaySeries();
 
+//Display by Letter
+void displayContentByLetter(char ch);
+
 // Memory cleanup functions
 void freeWatchlist();
 void freeContinueWatching();
 
 void freeBST(BSTNODE *root);
+
