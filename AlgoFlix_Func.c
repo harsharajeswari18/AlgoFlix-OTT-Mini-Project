@@ -715,7 +715,7 @@ void displayContentByLetter(char ch) {
 
     printf("\n------------------------------\n");
     printf("Results for '%c'\n", ch);
-    printf("--------------------------------\n\n");
+    printf("------------------------------\n\n");
 
     // --- MOVIES ---
     printf("MOVIES starting with '%c':\n\n", ch);
@@ -752,6 +752,7 @@ void displayContentByLetter(char ch) {
         printf("No series found starting with '%c'.\n", ch);
 
 }
+
 
 
 
