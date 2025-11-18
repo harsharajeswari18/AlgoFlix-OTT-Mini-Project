@@ -736,7 +736,7 @@ void displayContentByLetter(char ch) {
     
 
     // --- SERIES ---
-    printf("SERIES starting with '%c':\n\n", ch);
+    printf("\nSERIES starting with '%c':\n\n", ch);
 
     for (int i = 0; i < seriesCount; i++) {
         if (tolower(series_arr[i].title[0]) == ch) {
@@ -752,6 +752,7 @@ void displayContentByLetter(char ch) {
         printf("No series found starting with '%c'.\n", ch);
 
 }
+
 
 
 
