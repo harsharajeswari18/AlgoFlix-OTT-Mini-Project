@@ -26,6 +26,7 @@ int main()
         printf("S - Search\n");
         printf("D - Display All Movies\n");
         printf("P - Display All Series\n");
+		printf("L - Display All by Letter\n");
         printf("Q - Quit\n");
 
         printf("\nEnter your choice: ");
@@ -53,6 +54,12 @@ int main()
 
                 switch (subchoice) {
                 case 'A':
+					printf("\n---- ALL MOVIES ----\n");
+					displayMovies();
+					
+					printf("\n---- ALL SERIES ----\n");
+					displaySeries();
+
                     printf("\nEnter title to add: ");
                     scanf(" %[^\n]", title);
                     addToWatchlist(title);
@@ -103,6 +110,12 @@ int main()
 
                 switch (subchoice) {
                 case 'A':
+					printf("\n---- ALL MOVIES ----\n");
+					displayMovies();
+					
+					printf("\n---- ALL SERIES ----\n");
+					displaySeries();
+
                     printf("\nEnter title to add: ");
                     scanf(" %[^\n]", title);
                     enqueueCW(title);
@@ -145,6 +158,12 @@ int main()
 
                 switch (subchoice) {
                 case 'A': {
+					printf("\n---- ALL MOVIES ----\n");
+					displayMovies();
+					
+					printf("\n---- ALL SERIES ----\n");
+					displaySeries();
+
                     printf("\nEnter title to add: ");
                     scanf(" %[^\n]", title);
                     insertPQ(title);
@@ -210,6 +229,19 @@ int main()
             displaySeries();
             break;
 
+		//--------------------DISPLAY BY LETTER  -----------------
+		case 'L':
+			printf("\n\n==============================\n");
+			printf("           ALGOFLIX         \n");
+			printf("==============================\n");
+			
+			char ch;
+			printf("Enter first letter: ");
+			scanf(" %c", &ch);
+			displayContentByLetter(ch);
+			break;
+	
+			
         // ---------------- QUIT ----------------
         case 'Q':
             printf("\nExiting ALGOFLIX... Goodbye!\n");
@@ -227,4 +259,5 @@ int main()
 
     return 0;
 }
+
 
