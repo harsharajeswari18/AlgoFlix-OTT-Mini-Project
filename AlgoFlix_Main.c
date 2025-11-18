@@ -9,7 +9,7 @@
 int main() 
 {
 	printf("%d\n",MAX);
-    char choice, subchoice, title[100];
+    char choice, subchoice, title[100], ch; //for display by letter
     BSTNODE *root = NULL;
 
     root = buildBST(); // build BST once at start to perform search
@@ -26,7 +26,7 @@ int main()
         printf("S - Search\n");
         printf("D - Display All Movies\n");
         printf("P - Display All Series\n");
-		printf("L - Display All by Letter\n");
+		printf("F - Display All by first letter\n");
         printf("Q - Quit\n");
 
         printf("\nEnter your choice: ");
@@ -230,12 +230,11 @@ int main()
             break;
 
 		//--------------------DISPLAY BY LETTER  -----------------
-		case 'L':
+		case 'F':
 			printf("\n\n==============================\n");
 			printf("           ALGOFLIX         \n");
 			printf("==============================\n");
 			
-			char ch;
 			printf("Enter first letter: ");
 			scanf(" %c", &ch);
 			displayContentByLetter(ch);
@@ -259,5 +258,6 @@ int main()
 
     return 0;
 }
+
 
 
