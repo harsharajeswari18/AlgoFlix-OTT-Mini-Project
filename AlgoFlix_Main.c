@@ -8,7 +8,7 @@
 
 int main() 
 {
-	printf("%d\n",MAX);
+	printf("\nMAX defined on command line is %d\n",MAX);
     char choice, subchoice, title[100], ch; //for display by letter
     BSTNODE *root = NULL;
 
@@ -54,10 +54,7 @@ int main()
 
                 switch (subchoice) {
                 case 'A':
-					printf("\n---- ALL MOVIES ----\n");
 					displayMovies();
-					
-					printf("\n---- ALL SERIES ----\n");
 					displaySeries();
 
                     printf("\nEnter title to add: ");
@@ -110,10 +107,8 @@ int main()
 
                 switch (subchoice) {
                 case 'A':
-					printf("\n---- ALL MOVIES ----\n");
+		
 					displayMovies();
-					
-					printf("\n---- ALL SERIES ----\n");
 					displaySeries();
 
                     printf("\nEnter title to add: ");
@@ -158,10 +153,8 @@ int main()
 
                 switch (subchoice) {
                 case 'A': {
-					printf("\n---- ALL MOVIES ----\n");
-					displayMovies();
 					
-					printf("\n---- ALL SERIES ----\n");
+					displayMovies();
 					displaySeries();
 
                     printf("\nEnter title to add: ");
@@ -258,6 +251,7 @@ int main()
 
     return 0;
 }
+
 
 
 
