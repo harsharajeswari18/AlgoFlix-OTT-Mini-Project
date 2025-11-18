@@ -136,11 +136,23 @@ void removeFromWatchlist(char title[]) {
         return;
     }
 
+	
     NODE *temp = watchHead, *prev = NULL;
 
     // Check first node
     if ((temp->type == 1 && strcasecmp(temp->data.movie.title, title) == 0) ||
         (temp->type == 2 && strcasecmp(temp->data.series.title, title) == 0)) {
+
+		//Ask confirmation before unlinking
+		char ch;
+		printf("Are you sure you want to delete '%s' from Watchlist? (y/n): ", title);
+		scanf(" %c", &ch);
+		
+		if (ch != 'y' && ch != 'Y') {
+			printf("Deletion cancelled.\n");
+			return;
+		}
+		
         watchHead = temp->next;
         free(temp);
         printf("'%s' removed from Watchlist.\n", title);
@@ -151,7 +163,18 @@ void removeFromWatchlist(char title[]) {
     while (temp != NULL) {
         if ((temp->type == 1 && strcasecmp(temp->data.movie.title, title) == 0) ||
             (temp->type == 2 && strcasecmp(temp->data.series.title, title) == 0)) {
-            prev->next = temp->next;
+
+			//Ask confirmation before unlinking
+			char ch;
+			printf("Are you sure you want to delete '%s' from Watchlist? (y/n): ", title);
+			scanf(" %c", &ch);
+			
+			if (ch != 'y' && ch != 'Y') {
+				printf("Deletion cancelled.\n");
+				return;
+			}
+
+			prev->next = temp->next;
             free(temp);
             printf("'%s' removed from Watchlist.\n", title);
             return;
@@ -260,6 +283,15 @@ void dequeueCW() {
     else
         strcpy(title, temp->data.series.title);
 
+	//Ask Confirmation
+    char ch;
+    printf("Are you sure you want to remove '%s' from Continue Watching? (y/n): ", title);
+    scanf(" %c", &ch);
+    if (ch != 'y' && ch != 'Y') {
+        printf("Deletion cancelled.\n");
+        return;
+    }
+	
     frontCW = frontCW->next;
 
     if (frontCW == NULL) // if queue became empty
@@ -383,6 +415,16 @@ void deleteMaxPQ() {
         return;
     }
 
+	//Ask Confirmation
+    char ch;
+    printf("Are you sure you want to delete '%s' (%d) from Latest Releases? (y/n): ", heap[0].type == 1 ? heap[0].data.movie.title : heap[0].data.series.title,
+           getReleaseYear(heap[0]));
+    scanf(" %c", &ch);
+    if (ch != 'y' && ch != 'Y') {
+        printf("Deletion cancelled.\n");
+        return;
+    }
+	
     NODE maxItem = heap[0];
     heap[0] = heap[heapSize - 1];
     heapSize--;
@@ -711,6 +753,7 @@ void displayContentByLetter(char ch) {
 
     printf("\n===============================\n");
 }
+
 
 
 
