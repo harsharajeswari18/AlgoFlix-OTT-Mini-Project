@@ -733,7 +733,7 @@ void displayContentByLetter(char ch) {
     if (!foundMovie)
         printf("No movies found starting with '%c'.\n", ch);
 
-    printf("\n--------------------------------\n\n");
+    
 
     // --- SERIES ---
     printf("SERIES starting with '%c':\n\n", ch);
@@ -751,8 +751,8 @@ void displayContentByLetter(char ch) {
     if (!foundSeries)
         printf("No series found starting with '%c'.\n", ch);
 
-    printf("\n===============================\n");
 }
+
 
 
 
