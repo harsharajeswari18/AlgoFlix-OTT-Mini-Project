@@ -4,7 +4,9 @@
 #include<string.h>
 #include<strings.h>
 
+#ifndef MAX   // false → skip
 #define MAX 100
+#endif
 
 //Structures:
 
@@ -60,4 +62,5 @@ void displaySeries();
 // Memory cleanup functions
 void freeWatchlist();
 void freeContinueWatching();
+
 void freeBST(BSTNODE *root);
