@@ -4,6 +4,7 @@
 #include<string.h>
 #include<strings.h>
 #include"AlgoFlix.h"
+#include<ctype.h>
 
 //Arrays:
 
@@ -663,6 +664,56 @@ void freeBST(BSTNODE *root) {
 	}
     free(root);
 }
+
+
+//DISPLAY BY LETTER
+void displayContentByLetter(char ch) {
+    ch = tolower(ch);
+    int foundMovie = 0, foundSeries = 0;
+
+    printf("\n------------------------------\n");
+    printf("Results for '%c'\n", ch);
+    printf("--------------------------------\n\n");
+
+    // --- MOVIES ---
+    printf("MOVIES starting with '%c':\n\n", ch);
+
+    for (int i = 0; i < movieCount; i++) {
+        if (tolower(movie_arr[i].title[0]) == ch) {
+            printf("%-35s | %-15s | %d\n",
+                   movie_arr[i].title,
+                   movie_arr[i].genre,
+                   movie_arr[i].releaseYear);
+            foundMovie = 1;
+        }
+    }
+
+    if (!foundMovie)
+        printf("No movies found starting with '%c'.\n", ch);
+
+    printf("\n--------------------------------\n\n");
+
+    // --- SERIES ---
+    printf("SERIES starting with '%c':\n\n", ch);
+
+    for (int i = 0; i < seriesCount; i++) {
+        if (tolower(series_arr[i].title[0]) == ch) {
+            printf("%-35s | %-15s | %d\n",
+                   series_arr[i].title,
+                   series_arr[i].genre,
+                   series_arr[i].releaseYear);
+            foundSeries = 1;
+        }
+    }
+
+    if (!foundSeries)
+        printf("No series found starting with '%c'.\n", ch);
+
+    printf("\n===============================\n");
+}
+
+
+
 
 
 
