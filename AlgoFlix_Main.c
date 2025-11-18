@@ -6,7 +6,9 @@
 #include<ctype.h>
 #include"AlgoFlix.h"   
 
-int main() {
+int main() 
+{
+	printf("%d\n",MAX);
     char choice, subchoice, title[100];
     BSTNODE *root = NULL;
 
@@ -225,3 +227,4 @@ int main() {
 
     return 0;
 }
+
